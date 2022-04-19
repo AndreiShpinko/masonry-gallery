@@ -25,12 +25,10 @@ const Photo = (props) => {
   useEffect(() => {
     async function fetchData() {
       const data = await new galleryServices().getPhotoById(id);
-      console.log(data);
       dispatch(setPhoto(data));
 
       const username = location.state.username;
       const userPhotos = await new galleryServices().getUserPhotos(username);
-      console.log(userPhotos);
       dispatch(setUserPhotos(userPhotos.photos));
     }
     fetchData();
@@ -47,12 +45,9 @@ const Photo = (props) => {
     );
   } else {
     const [
-      color,
-
       mainImage,
       userImage,
 
-      photoData, // when photo was crerated
       photoLocation,
 
       name, // user name
@@ -64,12 +59,9 @@ const Photo = (props) => {
       instagramName,
       twitterName,
     ] = [
-      photo.color,
-
       photo.urls.regular,
       photo.user.profile_image.large,
 
-      photo.created_at,
       photo.location.title,
 
       photo.user.name,
@@ -85,7 +77,7 @@ const Photo = (props) => {
     return (
       <Container>
         <Wrap>
-          <Left color={color}>
+          <Left>
             {window.innerWidth <= 768 && (
               <TopContent
                 unsplashUrl={unsplashUrl}
@@ -100,7 +92,7 @@ const Photo = (props) => {
             </ImageWrapper>
           </Left>
 
-          <Right color={color}>
+          <Right>
             <div>
               {window.innerWidth > 768 && (
                 <TopContent
@@ -117,7 +109,6 @@ const Photo = (props) => {
                   twitterName,
                   portfolioUrl,
                   photoLocation,
-                  photoData,
                 }}
               />
             </div>
@@ -149,7 +140,7 @@ const Left = styled.div`
   font-size: 0;
   @media screen and (max-width: 768px) {
     display: block;
-    padding: 15px 0 0 0;
+    padding: 0;
   }
 `;
 const Right = styled.div`
@@ -164,12 +155,14 @@ const Right = styled.div`
   @media screen and (max-width: 768px) {
     padding: 0;
     margin-top: 15px;
+    align-items: center;
   }
 `;
 const Wrap = styled.div`
   display: flex;
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    padding: 15px 0;
   }
 `;
 
@@ -197,6 +190,7 @@ const Image = styled.img`
     transform: translate(0, 0);
     width: 100%;
     margin-top: 20px;
+    border-radius: 10px;
   }
 `;
 

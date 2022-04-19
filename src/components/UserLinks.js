@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const UserLinks = ({ links }) => {
+  const linksAmount = Object.values(links).filter(link => link).length;
+
   const {
     unsplashUrl,
     instagramName,
@@ -25,9 +27,10 @@ const UserLinks = ({ links }) => {
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
+
   return (
     <Wrapper>
-      <Links>
+      <Links amount={linksAmount}>
         <UnsplashLink href={unsplashUrl}>
           <i
             className="fa-brands fa-unsplash"
@@ -75,13 +78,19 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  margin-top: 15px;
+  @media screen and (max-width: 768px) {
+    margin: 10px 0;
+  }
 `;
 
 const Links = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 75px);
-  grid-template-rows: repeat(2, 75px);
+  grid-template-columns: repeat(
+    ${(props) => (props.amount > 3 ? 4 : 3)},
+    minmax(50px, 75px)
+  );
+  grid-template-rows: repeat(2, minmax(50px, 75px));
   grid-gap: 6px;
 `;
 

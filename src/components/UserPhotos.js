@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const UserPhotos = ({ urls }) => {
-  console.log(urls);
   if (urls.length) {
     return (
       <Wrapper>
