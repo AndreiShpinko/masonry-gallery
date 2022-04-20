@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
-import { setGallery } from "../redux/actionCreators/galleryActions";
+import { setGallery, setLoaderStatus } from "../redux/actionCreators/galleryActions";
 import galleryServices from "../services/galleryServices";
 
 import Form from "../components/Form";
@@ -14,6 +14,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setLoaderStatus(true));
+
     async function fetchData() {
       const data = await new galleryServices().getPhotos();
       dispatch(setGallery(data));

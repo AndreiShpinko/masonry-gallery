@@ -17,7 +17,7 @@ import UserPhotos from "../components/UserPhotos";
 import UserLinks from "../components/UserLinks";
 import TopContent from "../components/TopContent";
 
-const Photo = (props) => {
+const Photo = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { id } = useParams();

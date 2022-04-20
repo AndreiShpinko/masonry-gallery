@@ -14,23 +14,34 @@ const Card = ({
 }) => {
   return (
     <CardWrapper>
-      <Link to={`/photo/${id}`} state={{username: username}}>
+      <Link
+        to={`/photo/${id}`}
+        state={{ username: username }}
+        aria-label="to-unsplash-image"
+      >
         <ImageWrapper>
-          <Image src={imageUrl} alt="" />
+          <Image src={imageUrl} alt="" width="100px" height="auto" />
         </ImageWrapper>
       </Link>
       <Buttons color={color}>
         {instagramUrl && (
-          <ButtonInstagram href={`https://www.instagram.com/${instagramUrl}`}>
+          <ButtonInstagram
+            aria-label="Instagram"
+            href={`https://www.instagram.com/${instagramUrl}`}
+          >
             <i className="fa-brands fa-instagram"></i>
           </ButtonInstagram>
         )}
         {twitterUrl && (
-          <ButtonTwitter href={`https://twitter.com/${twitterUrl}`}>
+          <ButtonTwitter
+            aria-label="Twitter"
+            href={`https://twitter.com/${twitterUrl}`}
+          >
             <i className="fa-brands fa-twitter"></i>
           </ButtonTwitter>
         )}
         <ButtonUnsplash
+          aria-label="Unsplash"
           href={unsplashUrl}
           background={unsplashPhoto}
           color={color}
@@ -59,6 +70,7 @@ const ImageWrapper = styled.div`
   z-index: 5;
   transition: 0.2s;
   bottom: 0;
+  overflow: hidden;
 
   &:hover {
     bottom: 5px;
