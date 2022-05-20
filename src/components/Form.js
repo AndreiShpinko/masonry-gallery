@@ -23,12 +23,11 @@ const Form = () => {
 
       dispatch(setLoaderStatus(true));
 
-      async function fetchDataByQuery() {
-        const data = await new galleryServices().getPhotosByQuery(value);
+      new galleryServices().getPhotosByQuery(value).then((data) => {
+        console.log(data);
         dispatch(setGallery(data));
-      }
-      fetchDataByQuery();
-
+      });
+      
       setValue("");
     } else {
       setRedInput(true);
@@ -85,7 +84,6 @@ const Button = styled.button`
     box-shadow: 0px 3px 10px 0px #1875ff;
   }
 `;
-
 
 const ValueTitle = styled.h2`
   text-align: center;

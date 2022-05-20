@@ -7,7 +7,7 @@ import {
 } from "../redux/actionCreators/galleryActions";
 import galleryServices from "../services/galleryServices";
 
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -19,25 +19,24 @@ import TopContent from "../components/TopContent";
 
 const Photo = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const { id } = useParams();
 
   useEffect(() => {
-    async function fetchData() {
-      const data = await new galleryServices().getPhotoById(id);
+    new galleryServices().getPhotoById(id).then((data) => {
       dispatch(setPhoto(data));
 
-      const username = location.state.username;
-      const userPhotos = await new galleryServices().getUserPhotos(username);
-      dispatch(setUserPhotos(userPhotos.photos));
-    }
-    fetchData();
+      let username = data.user.username;
+
+      new galleryServices()
+        .getUserPhotos(username)
+        .then((userPhotos) => dispatch(setUserPhotos(userPhotos.photos)));
+    });
   }, []);
 
   const photo = useSelector((state) => state.gallery.photo);
   const userPhotos = useSelector((state) => state.gallery.userPhotos);
 
-  if (!photo) {
+  if (!photo || !userPhotos) {
     return (
       <LoaderWrapper>
         <Loader />

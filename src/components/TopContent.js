@@ -22,7 +22,7 @@ const TopContent = ({ unsplashUrl, userImage, name, username }) => {
       </User>
       <Link to="/">
         <HomeLink>
-          <i class="fa-solid fa-house-chimney"></i>
+          <i className="fa-solid fa-house-chimney"></i>
         </HomeLink>
       </Link>
     </TopContentWrap>

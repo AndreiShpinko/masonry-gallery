@@ -3,7 +3,11 @@ import styled from "styled-components";
 import Card from "./Card";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setLoaderStatus, setPhoto, setUserPhotos } from "../redux/actionCreators/galleryActions";
+import {
+  setLoaderStatus,
+  setPhoto,
+  setUserPhotos,
+} from "../redux/actionCreators/galleryActions";
 
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Loader from "./Loader";
@@ -19,8 +23,8 @@ const Gallery = () => {
   }, [photos]);
 
   useEffect(() => {
-    dispatch(setPhoto(''));
-    dispatch(setUserPhotos(''));
+    dispatch(setPhoto(""));
+    dispatch(setUserPhotos(""));
   }, []);
 
   if (loader) {

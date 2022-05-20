@@ -16,11 +16,10 @@ const Card = ({
     <CardWrapper>
       <Link
         to={`/photo/${id}`}
-        state={{ username: username }}
         aria-label="to-unsplash-image"
       >
         <ImageWrapper>
-          <Image src={imageUrl} alt="" width="100px" height="auto" />
+          <Image src={imageUrl} alt="" />
         </ImageWrapper>
       </Link>
       <Buttons color={color}>

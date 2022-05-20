@@ -1,30 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Loader from "./Loader";
 
 const UserPhotos = ({ urls }) => {
-  if (urls.length) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [loading]);
+
+  if (loading) {
     return (
       <Wrapper>
-        <BigPhoto href={`https://unsplash.com/photos/${urls[0].id}`}>
-          <Image src={urls[0].urls.regular} alt="" />
+        <BigPhoto as="div">
+          <Loader />
         </BigPhoto>
-        <SmallPhoto href={`https://unsplash.com/photos/${urls[1].id}`}>
-          <Image src={urls[1].urls.regular} alt="" />
+        <SmallPhoto as="div">
+          <Loader />
         </SmallPhoto>
-        <SmallPhoto href={`https://unsplash.com/photos/${urls[2].id}`}>
-          <Image src={urls[2].urls.regular} alt="" />
+        <SmallPhoto as="div">
+          <Loader />
         </SmallPhoto>
-      </Wrapper>
-    );
-  } else {
-    return (
-      <Wrapper>
-        <BigPhoto as="div">Error</BigPhoto>
-        <SmallPhoto as="div">Error</SmallPhoto>
-        <SmallPhoto as="div">Error</SmallPhoto>
       </Wrapper>
     );
   }
+
+  return (
+    <Wrapper>
+      <BigPhoto href={`https://unsplash.com/photos/${urls[0].id}`}>
+        <Image src={urls[0].urls.regular} alt="" />
+      </BigPhoto>
+      <SmallPhoto href={`https://unsplash.com/photos/${urls[1].id}`}>
+        <Image src={urls[1].urls.regular} alt="" />
+      </SmallPhoto>
+      <SmallPhoto href={`https://unsplash.com/photos/${urls[2].id}`}>
+        <Image src={urls[2].urls.regular} alt="" />
+      </SmallPhoto>
+    </Wrapper>
+  );
 };
 
 const Image = styled.img`
