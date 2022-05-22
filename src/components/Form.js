@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   setGallery,
-  setLoaderStatus,
 } from "../redux/actionCreators/galleryActions";
 import galleryServices from "../services/galleryServices";
 
@@ -21,10 +20,9 @@ const Form = () => {
     if (value) {
       setTitleValue(value);
 
-      dispatch(setLoaderStatus(true));
+      dispatch(setGallery(null));
 
       new galleryServices().getPhotosByQuery(value).then((data) => {
-        console.log(data);
         dispatch(setGallery(data));
       });
       
@@ -52,7 +50,7 @@ const Form = () => {
           {window.innerWidth > 768 ? (
             "Search"
           ) : (
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
           )}
         </Button>
       </FormWrap>
@@ -97,7 +95,7 @@ const ValueTitle = styled.h2`
 
 const FormWrap = styled.form`
   width: 80%;
-  margin: 2rem auto 4rem;
+  margin: 2rem auto 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

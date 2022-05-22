@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import {
   setGallery,
-  setLoaderStatus,
 } from "../redux/actionCreators/galleryActions";
 import galleryServices from "../services/galleryServices";
 
@@ -17,7 +16,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoaderStatus(true));
     new galleryServices().getPhotos().then((data) => {
       dispatch(setGallery(data));
     });

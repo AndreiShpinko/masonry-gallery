@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Card = ({
-  username,
   imageUrl,
   color,
   unsplashUrl,
@@ -12,13 +11,18 @@ const Card = ({
   twitterUrl,
   id,
 }) => {
+
+  const handlerLoadCard = () => setLoadedCard(true);
+
+  const [loadedCard, setLoadedCard] = useState(false);
+
   return (
-    <CardWrapper>
+    <CardWrapper onLoad={handlerLoadCard}>
       <Link
         to={`/photo/${id}`}
         aria-label="to-unsplash-image"
       >
-        <ImageWrapper>
+        <ImageWrapper color={color} loadedCard={loadedCard}>
           <Image src={imageUrl} alt="" />
         </ImageWrapper>
       </Link>
@@ -52,14 +56,12 @@ const Card = ({
 
 const changeColor = (color) => {
   const exampleColor = parseInt("d1d1d1", 16);
-  if (parseInt(color.substr(1), 16) > exampleColor) return "#000";
-  return "#fff";
+  return (parseInt(color.substr(1), 16) > exampleColor) ? "#000" : "#fff";
 };
 
 const CardWrapper = styled.div`
   display: inline-block;
   font-size: 0;
-  border-radius: 7px;
   text-decoration: none;
 `;
 
@@ -70,12 +72,27 @@ const ImageWrapper = styled.div`
   transition: 0.2s;
   bottom: 0;
   overflow: hidden;
+  border-radius: 7px;
+  width: 100%;
+  aspect-ratio: ${(props) => props.loadedCard ? "auto" : "1"};
 
   &:hover {
     bottom: 5px;
     & + div {
       background-color: #eee;
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: ${(props) => props.color};
+    transition: 3s;
+    opacity: ${(props) => props.loadedCard ? "0" : "1"};
   }
 `;
 
