@@ -12,7 +12,7 @@ const Card = ({
   id,
 }) => {
 
-  const handlerLoadCard = () => setLoadedCard(true);
+  const handlerLoadCard = () => setTimeout(() => setLoadedCard(true), 1000);
 
   const [loadedCard, setLoadedCard] = useState(false);
 
