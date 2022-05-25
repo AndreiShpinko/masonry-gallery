@@ -1,69 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Loader from "./Loader";
+import ImageWithLoad from "./ImageWithLoad";
 
 const UserPhotos = ({ urls }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [loading]);
-
-  if (loading) {
-    return (
-      <Wrapper>
-        <BigPhoto as="div">
-          <Loader />
-        </BigPhoto>
-        <SmallPhoto as="div">
-          <Loader />
-        </SmallPhoto>
-        <SmallPhoto as="div">
-          <Loader />
-        </SmallPhoto>
-      </Wrapper>
-    );
-  }
-
   return (
     <Wrapper>
-      <BigPhoto href={`https://unsplash.com/photos/${urls[0].id}`}>
-        <Image src={urls[0].urls.regular} alt="" />
+      <BigPhoto
+        href={urls[0] ? `https://unsplash.com/photos/${urls[0].id}` : "#"}
+      >
+        <ImageWithLoad source={urls[0]?.urls?.regular} loader/>
       </BigPhoto>
-      <SmallPhoto href={`https://unsplash.com/photos/${urls[1].id}`}>
-        <Image src={urls[1].urls.regular} alt="" />
+      <SmallPhoto
+        href={urls[1] ? `https://unsplash.com/photos/${urls[1].id}` : "#"}
+      >
+        <ImageWithLoad source={urls[1]?.urls?.regular} loader/>
       </SmallPhoto>
-      <SmallPhoto href={`https://unsplash.com/photos/${urls[2].id}`}>
-        <Image src={urls[2].urls.regular} alt="" />
+      <SmallPhoto
+        href={urls[2] ? `https://unsplash.com/photos/${urls[2].id}` : "#"}
+      >
+        <ImageWithLoad source={urls[2]?.urls?.regular} loader/>
       </SmallPhoto>
     </Wrapper>
   );
 };
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const ImageWrapper = styled.a`
-  overflow: hidden;
-  border-radius: 10px;
-  aspect-ratio: 1 / 1;
-  background-color: #eee;
-  color: red;
-  font-size: 1.4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SmallPhoto = styled(ImageWrapper)``;
-
-const BigPhoto = styled(ImageWrapper)`
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
-`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -71,6 +30,22 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 6px;
   margin-top: 15px;
+`;
+
+const SmallPhoto = styled.a`
+  display: grid;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const BigPhoto = styled.a`
+  display: grid;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
 `;
 
 export default UserPhotos;

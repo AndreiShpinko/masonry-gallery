@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
+import Fade from "react-reveal/Fade";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,16 +8,14 @@ import {
   setUserPhotos,
 } from "../redux/actionCreators/galleryActions";
 import galleryServices from "../services/galleryServices";
-
 import { useParams } from "react-router-dom";
-
-import styled from "styled-components";
 
 import Container from "../components/Container";
 import Loader from "../components/Loader";
 import UserPhotos from "../components/UserPhotos";
 import UserLinks from "../components/UserLinks";
 import TopContent from "../components/TopContent";
+import ImageWithLoad from "../components/ImageWithLoad";
 
 const Photo = () => {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const Photo = () => {
       userImage,
 
       photoLocation,
+      photoColor,
 
       name, // user name
       username, // user username
@@ -62,6 +63,7 @@ const Photo = () => {
       photo.user.profile_image.large,
 
       photo.location.title,
+      photo.color,
 
       photo.user.name,
       photo.user.username,
@@ -77,42 +79,48 @@ const Photo = () => {
       <Container>
         <Wrap>
           <Left>
-            {window.innerWidth <= 768 && (
-              <TopContent
-                unsplashUrl={unsplashUrl}
-                userImage={userImage}
-                name={name}
-                username={username}
-              />
-            )}
+            <Fade top duration={1000}>
+              <div>
+                {window.innerWidth <= 768 && (
+                  <TopContent
+                    unsplashUrl={unsplashUrl}
+                    userImage={userImage}
+                    name={name}
+                    username={username}
+                  />
+                )}
 
-            <ImageWrapper>
-              <Image src={mainImage} alt="" />
-            </ImageWrapper>
+                <ImageWrapper>
+                  <ImageWithLoad source={mainImage} loader color={photoColor} />
+                </ImageWrapper>
+              </div>
+            </Fade>
           </Left>
-
           <Right>
-            <div>
-              {window.innerWidth > 768 && (
-                <TopContent
-                  unsplashUrl={unsplashUrl}
-                  userImage={userImage}
-                  name={name}
-                  username={username}
-                />
-              )}
-              <UserLinks
-                links={{
-                  unsplashUrl,
-                  instagramName,
-                  twitterName,
-                  portfolioUrl,
-                  photoLocation,
-                }}
-              />
-            </div>
-
-            <UserPhotos urls={userPhotos} />
+            <Fade bottom duration={1000}>
+              <div>
+                <div>
+                  {window.innerWidth > 768 && (
+                    <TopContent
+                      unsplashUrl={unsplashUrl}
+                      userImage={userImage}
+                      name={name}
+                      username={username}
+                    />
+                  )}
+                  <UserLinks
+                    links={{
+                      unsplashUrl,
+                      instagramName,
+                      twitterName,
+                      portfolioUrl,
+                      photoLocation,
+                    }}
+                  />
+                </div>
+                <UserPhotos urls={userPhotos} />
+              </div>
+            </Fade>
           </Right>
         </Wrap>
       </Container>
@@ -140,6 +148,12 @@ const Left = styled.div`
   @media screen and (max-width: 768px) {
     display: block;
     padding: 0;
+    height: auto;
+  }
+
+  & > div {
+    width: 100%;
+    height: 100%;
   }
 `;
 const Right = styled.div`
@@ -157,6 +171,7 @@ const Right = styled.div`
     align-items: center;
   }
 `;
+
 const Wrap = styled.div`
   display: flex;
   @media screen and (max-width: 768px) {
@@ -171,25 +186,27 @@ const ImageWrapper = styled.div`
   height: 100%;
   font-size: 0;
   position: relative;
-`;
 
-const Image = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
+  & > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  @media screen and (max-width: 768px) {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
+    max-width: 100%;
+    max-height: 100%;
     width: 100%;
-    margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+
+    @media screen and (max-width: 768px) {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+
+      margin-top: 20px;
+      border-radius: 10px;
+    }
   }
 `;
 

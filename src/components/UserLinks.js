@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const UserLinks = ({ links }) => {
-  const linksAmount = Object.values(links).filter(link => link).length;
+  const linksAmount = Object.values(links).filter((link) => link).length;
 
   const {
     unsplashUrl,
@@ -26,7 +26,6 @@ const UserLinks = ({ links }) => {
   const getRandomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
   };
-
 
   return (
     <Wrapper>
@@ -87,7 +86,11 @@ const Wrapper = styled.div`
 const Links = styled.div`
   display: grid;
   grid-template-columns: repeat(
-    ${(props) => (props.amount > 3 ? 4 : 3)},
+    ${({ amount }) => {
+      if (amount == 1) return "2";
+      else if (amount <= 3) return "3";
+      else return "4";
+    }},
     minmax(50px, 75px)
   );
   grid-template-rows: repeat(2, minmax(50px, 75px));

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Fade from "react-reveal/Fade";
 
 const Card = ({
   imageUrl,
@@ -11,58 +12,63 @@ const Card = ({
   twitterUrl,
   id,
 }) => {
-
   const handlerLoadCard = () => setTimeout(() => setLoadedCard(true), 1000);
 
   const [loadedCard, setLoadedCard] = useState(false);
 
   return (
-    <CardWrapper onLoad={handlerLoadCard}>
-      <Link
-        to={`/photo/${id}`}
-        aria-label="to-unsplash-image"
-      >
-        <ImageWrapper color={color} loadedCard={loadedCard}>
-          <Image src={imageUrl} alt="" />
-        </ImageWrapper>
-      </Link>
-      <Buttons color={color}>
-        {instagramUrl && (
-          <ButtonInstagram
-            aria-label="Instagram"
-            href={`https://www.instagram.com/${instagramUrl}`}
-          >
-            <i className="fa-brands fa-instagram"></i>
-          </ButtonInstagram>
-        )}
-        {twitterUrl && (
-          <ButtonTwitter
-            aria-label="Twitter"
-            href={`https://twitter.com/${twitterUrl}`}
-          >
-            <i className="fa-brands fa-twitter"></i>
-          </ButtonTwitter>
-        )}
-        <ButtonUnsplash
-          aria-label="Unsplash"
-          href={unsplashUrl}
-          background={unsplashPhoto}
-          color={color}
-        />
-      </Buttons>
-    </CardWrapper>
+    <Fade
+      bottom
+      duration={1000}
+      style={{
+        width: "100%",
+      }}
+    >
+      <CardWrapper onLoad={handlerLoadCard}>
+        <Link to={`/photo/${id}`} aria-label="to-unsplash-image">
+          <ImageWrapper color={color} loadedCard={loadedCard}>
+            <Image src={imageUrl} alt="" />
+          </ImageWrapper>
+        </Link>
+        <Buttons color={color}>
+          {instagramUrl && (
+            <ButtonInstagram
+              aria-label="Instagram"
+              href={`https://www.instagram.com/${instagramUrl}`}
+            >
+              <i className="fa-brands fa-instagram"></i>
+            </ButtonInstagram>
+          )}
+          {twitterUrl && (
+            <ButtonTwitter
+              aria-label="Twitter"
+              href={`https://twitter.com/${twitterUrl}`}
+            >
+              <i className="fa-brands fa-twitter"></i>
+            </ButtonTwitter>
+          )}
+          <ButtonUnsplash
+            aria-label="Unsplash"
+            href={unsplashUrl}
+            background={unsplashPhoto}
+            color={color}
+          />
+        </Buttons>
+      </CardWrapper>
+    </Fade>
   );
 };
 
 const changeColor = (color) => {
   const exampleColor = parseInt("d1d1d1", 16);
-  return (parseInt(color.substr(1), 16) > exampleColor) ? "#000" : "#fff";
+  return parseInt(color.substr(1), 16) > exampleColor ? "#000" : "#fff";
 };
 
 const CardWrapper = styled.div`
   display: inline-block;
   font-size: 0;
   text-decoration: none;
+  width: 100%;
 `;
 
 const ImageWrapper = styled.div`
@@ -74,7 +80,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   border-radius: 7px;
   width: 100%;
-  aspect-ratio: ${(props) => props.loadedCard ? "auto" : "1"};
+  aspect-ratio: ${(props) => (props.loadedCard ? "auto" : "1")};
 
   &:hover {
     bottom: 5px;
@@ -84,15 +90,15 @@ const ImageWrapper = styled.div`
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
     background-color: ${(props) => props.color};
     transition: 3s;
-    opacity: ${(props) => props.loadedCard ? "0" : "1"};
+    opacity: ${(props) => (props.loadedCard ? "0" : "1")};
   }
 `;
 
