@@ -78,9 +78,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 15px;
-  @media screen and (max-width: 768px) {
-    margin: 10px 0;
-  }
 `;
 
 const Links = styled.div`

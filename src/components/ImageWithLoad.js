@@ -52,10 +52,10 @@ const ImageWrapper = styled.div`
   &::after {
     content: "";
     position: absolute;
-    top: -5px;
-    right: -5px;
-    bottom: -5px;
-    left: -5px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
     background-color: ${(props) => props.color};
     transition: 0.3s;
     opacity: ${(props) => (props.loadingImg ? "1" : "0")};
