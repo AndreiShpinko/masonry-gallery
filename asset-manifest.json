@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/masonry-gallery/static/css/main.c44823d4.css",
-    "main.js": "/masonry-gallery/static/js/main.e1ef60c2.js",
+    "main.js": "/masonry-gallery/static/js/main.819db0db.js",
     "index.html": "/masonry-gallery/index.html",
     "main.c44823d4.css.map": "/masonry-gallery/static/css/main.c44823d4.css.map",
-    "main.e1ef60c2.js.map": "/masonry-gallery/static/js/main.e1ef60c2.js.map"
+    "main.819db0db.js.map": "/masonry-gallery/static/js/main.819db0db.js.map"
   },
   "entrypoints": [
     "static/css/main.c44823d4.css",
-    "static/js/main.e1ef60c2.js"
+    "static/js/main.819db0db.js"
   ]
 }
