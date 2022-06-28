@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   setGallery,
 } from "../redux/actionCreators/galleryActions";
-import galleryServices from "../services/galleryServices";
+import GalleryServices from "../services/GalleryServices";
 
 import styled from "styled-components";
 
@@ -19,14 +19,12 @@ const Form = () => {
 
     if (value) {
       setTitleValue(value);
-
       dispatch(setGallery(null));
+      setValue("");
 
-      new galleryServices().getPhotosByQuery(value).then((data) => {
+      GalleryServices.getPhotosByQuery(value).then((data) => {
         dispatch(setGallery(data));
       });
-      
-      setValue("");
     } else {
       setRedInput(true);
       setTimeout(() => {

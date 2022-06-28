@@ -3,10 +3,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
-import {
-  setGallery,
-} from "../redux/actionCreators/galleryActions";
-import galleryServices from "../services/galleryServices";
+import { setGallery } from "../redux/actionCreators/galleryActions";
+import GalleryServices from "../services/GalleryServices";
 
 import Form from "../components/Form";
 import Gallery from "../components/Gallery";
@@ -16,18 +14,16 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    new galleryServices().getPhotos().then((data) => {
+    GalleryServices.getPhotos().then((data) => {
       dispatch(setGallery(data));
     });
   }, []);
 
   return (
     <Container>
-      <div>
-        <Title>Masonry Gallery</Title>
-        <Form />
-        <Gallery />
-      </div>
+      <Title>Masonry Gallery</Title>
+      <Form />
+      <Gallery />
     </Container>
   );
 };

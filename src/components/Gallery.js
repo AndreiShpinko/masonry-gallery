@@ -21,7 +21,7 @@ const Gallery = () => {
     dispatch(setUserPhotos(null));
   }, []);
 
-  if (photos === null) {
+  if (!photos) {
     return <Loader />;
   } else if (photos.length) {
     return (
@@ -39,6 +39,7 @@ const Gallery = () => {
             return (
               <Card
                 imageUrl={photo.urls.regular}
+                username={photo.user.username}
                 color={photo.color}
                 unsplashUrl={photo.user.links.html}
                 unsplashPhoto={photo.user.profile_image.large}

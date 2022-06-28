@@ -94,7 +94,7 @@ const LoaderStyle = styled.div`
     margin: auto;
     width: calc(var(--size) / 4);
     height: calc(var(--size) / 4);
-    background: #1875ff;
+    background: #000;
     border-radius: 50%;
     animation: loader-5-2 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -109,7 +109,7 @@ const LoaderStyle = styled.div`
     margin: auto;
     width: calc(var(--size) / 4);
     height: calc(var(--size) / 4);
-    background: #1875ff;
+    background: #000;
     border-radius: 50%;
     animation: loader-5-3 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -135,7 +135,7 @@ const LoaderStyle = styled.div`
     margin: auto;
     width: calc(var(--size) / 4);
     height: calc(var(--size) / 4);
-    background: #1875ff;
+    background: #000;
     border-radius: 50%;
     animation: loader-5-4 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -150,7 +150,7 @@ const LoaderStyle = styled.div`
     margin: auto;
     width: calc(var(--size) / 4);
     height: calc(var(--size) / 4);
-    background: #1875ff;
+    background: #000;
     border-radius: 50%;
     animation: loader-5-5 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }

@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const TopContent = ({ unsplashUrl, userImage, name, username }) => {
+const TopContent = ({ unsplashUrl, userAvatar, name, username }) => {
   return (
     <TopContentWrap>
       <User>
         <UserImageWrap href={unsplashUrl}>
-          <UserImage src={userImage} alt="" />
+          <UserImage src={userAvatar} alt="" />
         </UserImageWrap>
         <UserAboutWrap>
           <Title>{name}</Title>

@@ -7,7 +7,7 @@ import {
   setPhoto,
   setUserPhotos,
 } from "../redux/actionCreators/galleryActions";
-import galleryServices from "../services/galleryServices";
+import GalleryServices from "../services/GalleryServices";
 import { useParams } from "react-router-dom";
 
 import Container from "../components/Container";
@@ -22,12 +22,12 @@ const Photo = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    new galleryServices().getPhotoById(id).then((data) => {
+    GalleryServices.getPhotoById(id).then((data) => {
       dispatch(setPhoto(data));
 
-      let username = data.user.username;
+      const username = data.user.username;
 
-      new galleryServices()
+      GalleryServices
         .getUserPhotos(username)
         .then((userPhotos) => dispatch(setUserPhotos(userPhotos.photos)));
     });
@@ -45,32 +45,24 @@ const Photo = () => {
   } else {
     const [
       mainImage,
-      userImage,
-
+      userAvatar,
       photoLocation,
       photoColor,
-
-      name, // user name
-      username, // user username
-
+      name,
+      username,
       unsplashUrl,
       portfolioUrl,
-
       instagramName,
       twitterName,
     ] = [
       photo.urls.regular,
       photo.user.profile_image.large,
-
       photo.location.title,
       photo.color,
-
       photo.user.name,
       photo.user.username,
-
       photo.user.links.html,
       photo.user.social.portfolio_url,
-
       photo.user.social.instagram_username,
       photo.user.social.twitter_username,
     ];
@@ -78,13 +70,13 @@ const Photo = () => {
     return (
       <Container>
         <Wrap>
-          <Left>
+          <LeftPart>
             <Fade top duration={1000}>
               <div>
                 {window.innerWidth <= 768 && (
                   <TopContent
                     unsplashUrl={unsplashUrl}
-                    userImage={userImage}
+                    userAvatar={userAvatar}
                     name={name}
                     username={username}
                   />
@@ -95,15 +87,15 @@ const Photo = () => {
                 </ImageWrapper>
               </div>
             </Fade>
-          </Left>
-          <Right>
+          </LeftPart>
+          <RightPart>
             <Fade bottom duration={1000}>
               <div>
                 <div>
                   {window.innerWidth > 768 && (
                     <TopContent
                       unsplashUrl={unsplashUrl}
-                      userImage={userImage}
+                      userAvatar={userAvatar}
                       name={name}
                       username={username}
                     />
@@ -121,7 +113,7 @@ const Photo = () => {
                 <UserPhotos urls={userPhotos} />
               </div>
             </Fade>
-          </Right>
+          </RightPart>
         </Wrap>
       </Container>
     );
@@ -135,7 +127,7 @@ const LoaderWrapper = styled.div`
   align-items: center;
 `;
 
-const Left = styled.div`
+const LeftPart = styled.div`
   flex: 0 0 50%;
   overflow: hidden;
 
@@ -156,7 +148,7 @@ const Left = styled.div`
     height: 100%;
   }
 `;
-const Right = styled.div`
+const RightPart = styled.div`
   flex: 0 0 50%;
   overflow: hidden;
 

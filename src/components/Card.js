@@ -5,6 +5,7 @@ import Fade from "react-reveal/Fade";
 
 const Card = ({
   imageUrl,
+  username,
   color,
   unsplashUrl,
   unsplashPhoto,
@@ -13,7 +14,6 @@ const Card = ({
   id,
 }) => {
   const handlerLoadCard = () => setTimeout(() => setLoadedCard(true), 1000);
-
   const [loadedCard, setLoadedCard] = useState(false);
 
   return (
@@ -30,30 +30,33 @@ const Card = ({
             <Image src={imageUrl} alt="" />
           </ImageWrapper>
         </Link>
-        <Buttons color={color}>
-          {instagramUrl && (
-            <ButtonInstagram
-              aria-label="Instagram"
-              href={`https://www.instagram.com/${instagramUrl}`}
-            >
-              <i className="fa-brands fa-instagram"></i>
-            </ButtonInstagram>
-          )}
-          {twitterUrl && (
-            <ButtonTwitter
-              aria-label="Twitter"
-              href={`https://twitter.com/${twitterUrl}`}
-            >
-              <i className="fa-brands fa-twitter"></i>
-            </ButtonTwitter>
-          )}
-          <ButtonUnsplash
-            aria-label="Unsplash"
-            href={unsplashUrl}
-            background={unsplashPhoto}
-            color={color}
-          />
-        </Buttons>
+        <CardContent>
+          <Description>{username}</Description>
+          <Buttons color={color}>
+            {instagramUrl && (
+              <ButtonInstagram
+                aria-label="Instagram"
+                href={`https://www.instagram.com/${instagramUrl}`}
+              >
+                <i className="fa-brands fa-instagram"></i>
+              </ButtonInstagram>
+            )}
+            {twitterUrl && (
+              <ButtonTwitter
+                aria-label="Twitter"
+                href={`https://twitter.com/${twitterUrl}`}
+              >
+                <i className="fa-brands fa-twitter"></i>
+              </ButtonTwitter>
+            )}
+            <ButtonUnsplash
+              aria-label="Unsplash"
+              href={unsplashUrl}
+              background={unsplashPhoto}
+              color={color}
+            />
+          </Buttons>
+        </CardContent>
       </CardWrapper>
     </Fade>
   );
@@ -107,10 +110,23 @@ const Image = styled.img`
   width: 100%;
 `;
 
+const CardContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 5px;
+`;
+
+const Description = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  padding-right: 5px;
+`;
+
 const Buttons = styled.div`
   display: flex;
-  padding: 25px 5px 10px;
-  margin-top: -20px;
   background-color: #fff;
   justify-content: flex-end;
   transition: 0.3s;
