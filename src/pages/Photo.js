@@ -27,9 +27,9 @@ const Photo = () => {
 
       const username = data.user.username;
 
-      GalleryServices
-        .getUserPhotos(username)
-        .then((userPhotos) => dispatch(setUserPhotos(userPhotos.photos)));
+      GalleryServices.getUserPhotos(username).then((userPhotos) =>
+        dispatch(setUserPhotos(userPhotos.photos))
+      );
     });
   }, []);
 
@@ -176,27 +176,28 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   font-size: 0;
-  position: relative;
 
   & > div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    max-width: 100%;
-    max-height: 100%;
     width: 100%;
+    height: 100%;
     border-radius: 15px;
 
     @media screen and (max-width: 768px) {
-      position: relative;
-      top: 0;
-      left: 0;
-      transform: translate(0, 0);
-
-      margin-top: 20px;
       border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 15px;
+
+      @media screen and (max-width: 768px) {
+        border-radius: 10px;
+      }
     }
   }
 `;
