@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import styled from "styled-components";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGallery } from "../redux/actionCreators/galleryActions";
 import GalleryServices from "../services/GalleryServices";
 
@@ -13,10 +13,14 @@ import Container from "../components/Container";
 const Home = () => {
   const dispatch = useDispatch();
 
+  const photos = useSelector((state) => state.gallery.photos);
+
   useEffect(() => {
-    GalleryServices.getPhotos().then((data) => {
-      dispatch(setGallery(data));
-    });
+    if (!photos) {
+      GalleryServices.getPhotos().then((data) => {
+        dispatch(setGallery(data));
+      });
+    }
   }, []);
 
   return (
