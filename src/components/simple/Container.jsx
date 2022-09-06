@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = ({ children }) => {
-  return <ContainerWrap>{children}</ContainerWrap>;
+  return <ContainerStyled>{children}</ContainerStyled>;
 };
 
-const ContainerWrap = styled.div`
+const ContainerStyled = styled.div`
   width: 90%;
   margin: 0 auto;
 

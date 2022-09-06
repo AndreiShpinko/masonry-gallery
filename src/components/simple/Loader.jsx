@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Loader = () => {
+// size = small | normal | big
+const Loader = ({ size = "normal", color = "#000" }) => {
   return (
-    <LoaderWrapper>
-      <LoaderStyle>
+    <LoaderWrapper size={size}>
+      <LoaderStyled size={size} color={color}>
         <span></span>
-      </LoaderStyle>
+      </LoaderStyled>
     </LoaderWrapper>
   );
 };
@@ -14,13 +15,25 @@ const Loader = () => {
 const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   div {
     margin: 0 auto;
   }
+  height: ${({ size }) => {
+    if (size === "normal") return "5rem";
+    else if (size === "small") return "4rem";
+    else if (size === "big") return "6rem";
+  }};
 `;
 
-const LoaderStyle = styled.div`
-  --size: 52px;
+const LoaderStyled = styled.div`
+  // --size: 3.5rem;
+  --size: ${({ size }) => {
+    if (size === "normal") return "3.5rem";
+    else if (size === "small") return "2.5rem";
+    else if (size === "big") return "4.5rem";
+  }};
+  --color: ${({ color }) => color};
 
   @keyframes loader-5-1 {
     0% {
@@ -36,7 +49,7 @@ const LoaderStyle = styled.div`
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(calc(var(--size) / 4 * 3), 0, 0) scale(0.5);
+      transform: translate3d(calc(var(--size) / 1.2), 0, 0) scale(0.5);
     }
     100% {
       transform: translate3d(0, 0, 0) scale(1);
@@ -48,7 +61,7 @@ const LoaderStyle = styled.div`
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(calc(var(--size) / 4 * -3), 0, 0) scale(0.5);
+      transform: translate3d(calc(var(--size) / -1.2), 0, 0) scale(0.5);
     }
     100% {
       transform: translate3d(0, 0, 0) scale(1);
@@ -60,7 +73,7 @@ const LoaderStyle = styled.div`
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(0, calc(var(--size) / 4 * 3), 0) scale(0.5);
+      transform: translate3d(0, calc(var(--size) / 1.2), 0) scale(0.5);
     }
     100% {
       transform: translate3d(0, 0, 0) scale(1);
@@ -72,7 +85,7 @@ const LoaderStyle = styled.div`
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(0, calc(var(--size) / 4 * -3), 0) scale(0.5);
+      transform: translate3d(0, calc(var(--size) / -1.2), 0) scale(0.5);
     }
     100% {
       transform: translate3d(0, 0, 0) scale(1);
@@ -92,9 +105,9 @@ const LoaderStyle = styled.div`
     bottom: 0;
     right: auto;
     margin: auto;
-    width: calc(var(--size) / 4);
-    height: calc(var(--size) / 4);
-    background: #000;
+    width: calc(var(--size) / 4.5);
+    height: calc(var(--size) / 4.5);
+    background: var(--color);
     border-radius: 50%;
     animation: loader-5-2 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -107,9 +120,9 @@ const LoaderStyle = styled.div`
     bottom: 0;
     right: 0;
     margin: auto;
-    width: calc(var(--size) / 4);
-    height: calc(var(--size) / 4);
-    background: #000;
+    width: calc(var(--size) / 4.5);
+    height: calc(var(--size) / 4.5);
+    background: var(--color);
     border-radius: 50%;
     animation: loader-5-3 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -133,9 +146,9 @@ const LoaderStyle = styled.div`
     bottom: auto;
     right: 0;
     margin: auto;
-    width: calc(var(--size) / 4);
-    height: calc(var(--size) / 4);
-    background: #000;
+    width: calc(var(--size) / 4.5);
+    height: calc(var(--size) / 4.5);
+    background: var(--color);
     border-radius: 50%;
     animation: loader-5-4 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
@@ -148,9 +161,9 @@ const LoaderStyle = styled.div`
     bottom: 0;
     right: 0;
     margin: auto;
-    width: calc(var(--size) / 4);
-    height: calc(var(--size) / 4);
-    background: #000;
+    width: calc(var(--size) / 4.5);
+    height: calc(var(--size) / 4.5);
+    background: var(--color);
     border-radius: 50%;
     animation: loader-5-5 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }

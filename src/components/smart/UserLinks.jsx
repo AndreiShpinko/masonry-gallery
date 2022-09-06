@@ -1,43 +1,48 @@
 import React from "react";
 import styled from "styled-components";
 
-const UserLinks = ({ links }) => {
-  const linksAmount = Object.values(links).filter((link) => link).length;
+import { useSelector } from "react-redux";
+import { array_of_colors } from "../../core/constants";
 
+const UserLinks = () => {
   const {
+    user: {
+      links: { html: unsplashUrl },
+      social: {
+        portfolio_url: portfolioUrl,
+        instagram_username: instagramName,
+        twitter_username: twitterName,
+      },
+    },
+    location: { title: photoLocation },
+  } = useSelector((state) => state.photo.image);
+
+  const linksAmount = [
+    photoLocation,
     unsplashUrl,
+    portfolioUrl,
     instagramName,
     twitterName,
-    portfolioUrl,
-    photoLocation,
-  } = links;
-
-  const colors = [
-    "#000",
-    "#ff0000",
-    "#0400ff",
-    "#00df11",
-    "#ede600",
-    "#be00ed",
-    "#ed0099",
-    "#00c1ed",
-  ];
+  ].filter((el) => el).length;
 
   const getRandomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
+    return array_of_colors[Math.floor(Math.random() * array_of_colors.length)];
   };
 
   return (
     <Wrapper>
       <Links amount={linksAmount}>
-        <UnsplashLink href={unsplashUrl}>
+        <UnsplashLink href={unsplashUrl} aria-label="unsplash-link">
           <i
             className="fa-brands fa-unsplash"
             style={{ color: getRandomColor() }}
           ></i>
         </UnsplashLink>
         {instagramName && (
-          <Link href={`https://www.instagram.com/${instagramName}`}>
+          <Link
+            href={`https://www.instagram.com/${instagramName}`}
+            aria-label="instagram-link"
+          >
             <i
               className="fa-brands fa-instagram"
               style={{ color: getRandomColor() }}
@@ -45,7 +50,10 @@ const UserLinks = ({ links }) => {
           </Link>
         )}
         {twitterName && (
-          <Link href={`https://twitter.com/${twitterName}`}>
+          <Link
+            href={`https://twitter.com/${twitterName}`}
+            aria-label="twitter-link"
+          >
             <i
               className="fa-brands fa-twitter"
               style={{ color: getRandomColor() }}
@@ -53,7 +61,7 @@ const UserLinks = ({ links }) => {
           </Link>
         )}
         {portfolioUrl && (
-          <Link href={`${portfolioUrl}`}>
+          <Link href={`${portfolioUrl}`} aria-label="portfolio-link">
             <i
               className="fa-solid fa-briefcase"
               style={{ color: getRandomColor() }}
@@ -61,7 +69,10 @@ const UserLinks = ({ links }) => {
           </Link>
         )}
         {photoLocation && (
-          <Link href={`https://www.google.com.ua/maps/place/${photoLocation}`}>
+          <Link
+            href={`https://www.google.com.ua/maps/place/${photoLocation}`}
+            aria-label="google-maps-link"
+          >
             <i
               className="fa-solid fa-location-dot"
               style={{ color: getRandomColor() }}
@@ -90,7 +101,7 @@ const Links = styled.div`
     }},
     minmax(50px, 75px)
   );
-  grid-template-rows: repeat(2, minmax(50px, 75px));
+  grid-template-rows: repeat(2, minmax(50px, 1fr));
   grid-gap: 6px;
 `;
 

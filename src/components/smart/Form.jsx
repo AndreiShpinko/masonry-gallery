@@ -1,30 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  setGallery,
-} from "../redux/actionCreators/galleryActions";
-import GalleryServices from "../services/GalleryServices";
-
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setHomePageGallery,
+  setHomePageSearchValue,
+  setHomePageGalleryHasError,
+} from "../../core/redux/actionCreators/actionCreators";
+import UnsplashServices from "../../core/services/UnsplashServices";
+
+import Fade from "react-reveal/Fade";
+import Title from "../ui/Title";
+import Button from "../ui/Button";
 
 const Form = () => {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
-  const [titleValue, setTitleValue] = useState("");
   const [redInput, setRedInput] = useState(false);
+
+  const searchValue = useSelector((state) => state.home.searchValue);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     if (value) {
-      setTitleValue(value);
-      dispatch(setGallery(null));
+      dispatch(setHomePageSearchValue(value));
+      dispatch(setHomePageGallery(false));
       setValue("");
 
-      GalleryServices.getPhotosByQuery(value).then((data) => {
-        dispatch(setGallery(data));
-      });
+      UnsplashServices.getGalleryByQuery(value)
+        .then((data) => {
+          dispatch(setHomePageGallery(data));
+        })
+        .catch((error) => {
+          console.log(error);
+          dispatch(setHomePageGalleryHasError(error));
+        });
     } else {
       setRedInput(true);
       setTimeout(() => {
@@ -35,7 +46,9 @@ const Form = () => {
 
   return (
     <>
-      <ValueTitle>{titleValue}</ValueTitle>
+      <Fade when={searchValue}>
+        <Title styles={TitleStyles}>{searchValue}</Title>
+      </Fade>
       <FormWrap action="#" onSubmit={(e) => handleFormSubmit(e)}>
         <Input
           type="text"
@@ -56,39 +69,9 @@ const Form = () => {
   );
 };
 
-const Button = styled.button`
-  display: inline-block;
-  padding: 12px 24px;
-  border: 1px solid #4f4f4f;
-  border-radius: 15px;
-  transition: all 0.3s;
-  font-size: 1.2rem;
-  color: #fff;
-  box-shadow: 0px 3px 10px -3px #1875ff;
-  position: relative;
-  border: none;
-  background: #1875ff;
-  cursor: pointer;
-  outline: none;
-
-  @media screen and (max-width: 768px) {
-    padding: 0.6rem 12px;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 3px 10px 0px #1875ff;
-  }
-`;
-
-const ValueTitle = styled.h2`
+const TitleStyles = `
   text-align: center;
   margin-top: 0.8rem;
-  font-size: 1.6rem;
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.2rem;
-  }
 `;
 
 const FormWrap = styled.form`

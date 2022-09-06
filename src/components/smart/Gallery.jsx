@@ -3,27 +3,38 @@ import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setPhoto,
-  setUserPhotos,
-} from "../redux/actionCreators/galleryActions";
+  setPhotoPageImage,
+  setPhotoPageImages,
+} from "../../core/redux/actionCreators/actionCreators";
 
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Card from "./Card";
-import Loader from "./Loader";
+import Loader from "../simple/Loader";
+import Subtitle from "../ui/Subtitle";
+import Title from "../ui/Title";
 
 const Gallery = () => {
   const dispatch = useDispatch();
 
-  const photos = useSelector((state) => state.gallery.photos);
+  const { gallery, error } = useSelector((state) => state.home);
+
+  // const [delayForCardLazyLoading, delayForCsetardLazyLoading] = useState(initialState);
 
   useEffect(() => {
-    dispatch(setPhoto(null));
-    dispatch(setUserPhotos(null));
+    dispatch(setPhotoPageImage(false));
+    dispatch(setPhotoPageImages(false));
   }, []);
 
-  if (!photos) {
+  if (error) {
+    return (
+      <Wrapper>
+        <Title>Sorry, we have error</Title>
+        <Subtitle styles={SubtitleStyles}>{error.message}</Subtitle>
+      </Wrapper>
+    );
+  } else if (!gallery) {
     return <Loader />;
-  } else if (photos.length) {
+  } else if (gallery.length) {
     return (
       <ResponsiveMasonry
         columnsCountBreakPoints={{
@@ -35,17 +46,18 @@ const Gallery = () => {
         }}
       >
         <Masonry gutter="10px">
-          {photos.map((photo) => {
+          {gallery.map((photo) => {
             return (
               <Card
-                imageUrl={photo.urls.regular}
+                imageUrl={photo.urls.small}
                 username={photo.user.username}
                 color={photo.color}
                 unsplashUrl={photo.user.links.html}
-                unsplashPhoto={photo.user.profile_image.large}
+                unsplashPhoto={photo.user.profile_image.medium}
                 instagramUrl={photo.user.social.instagram_username}
                 twitterUrl={photo.user.social.twitter_username}
                 id={photo.id}
+                // galleryLoaded={}
                 key={photo.id}
               />
             );
@@ -53,10 +65,15 @@ const Gallery = () => {
         </Masonry>
       </ResponsiveMasonry>
     );
-  } else return <WarningTitle>Sorry, no matches</WarningTitle>;
+  } else return <Title styles={"text-align: center;"}>Sorry, no matches</Title>;
 };
 
-const WarningTitle = styled.h2`
+const SubtitleStyles = `
+margin-top: 1rem;
+display: inline-block;
+`;
+
+const Wrapper = styled.div`
   text-align: center;
 `;
 

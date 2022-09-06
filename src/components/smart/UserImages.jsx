@@ -1,24 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import ImageWithLoad from "./ImageWithLoad";
+import ImageWithLoad from "../ordinary/ImageWithLoad";
 
-const UserPhotos = ({ urls }) => {
+const UserImages = () => {
+  const urls = useSelector((state) => state.photo.images);
+
   return (
     <Wrapper>
       <BigPhoto
         href={urls[0] ? `https://unsplash.com/photos/${urls[0].id}` : "#"}
       >
-        <ImageWithLoad source={urls[0]?.urls?.regular} loader/>
+        <ImageWithLoad
+          source={urls[0]?.urls?.regular}
+          loader
+          loaderSize="small"
+        />
       </BigPhoto>
       <SmallPhoto
         href={urls[1] ? `https://unsplash.com/photos/${urls[1].id}` : "#"}
       >
-        <ImageWithLoad source={urls[1]?.urls?.regular} loader/>
+        <ImageWithLoad
+          source={urls[1]?.urls?.regular}
+          loader
+          loaderSize="small"
+        />
       </SmallPhoto>
       <SmallPhoto
         href={urls[2] ? `https://unsplash.com/photos/${urls[2].id}` : "#"}
       >
-        <ImageWithLoad source={urls[2]?.urls?.regular} loader/>
+        <ImageWithLoad
+          source={urls[2]?.urls?.regular}
+          loader
+          loaderSize="small"
+        />
       </SmallPhoto>
     </Wrapper>
   );
@@ -48,4 +63,4 @@ const BigPhoto = styled.a`
   grid-row: 1 / 3;
 `;
 
-export default UserPhotos;
+export default UserImages;

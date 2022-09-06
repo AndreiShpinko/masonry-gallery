@@ -1,5 +1,0 @@
-export const ActionTypes = {
-  SET_PHOTO: "SET_PHOTO",
-  SET_GALLERY: "SET_GALLERY",
-  SET_USER_PHOTOS: "SET_USER_PHOTOS",
-};

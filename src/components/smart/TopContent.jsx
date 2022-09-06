@@ -1,42 +1,64 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const TopContent = ({ unsplashUrl, userAvatar, name, username }) => {
+import Subtitle from "../ui/Subtitle";
+import Title from "../ui/Title";
+
+const TopContent = () => {
+
+  const {
+    user: {
+      links: { html: unsplashUrl },
+      name,
+      username,
+    },
+    urls: { regular: userAvatar },
+  } = useSelector((state) => state.photo.image);
+
   return (
     <TopContentWrap>
-      <User>
-        <UserImageWrap href={unsplashUrl}>
-          <UserImage src={userAvatar} alt="" />
-        </UserImageWrap>
-        <UserAboutWrap>
-          <Title>{name}</Title>
+      <UserImageWrap href={unsplashUrl}>
+        <UserImage src={userAvatar} alt="" />
+      </UserImageWrap>
 
-          <UnsplashLink href={unsplashUrl}>
-            <Icon>
-              <i className="fa-brands fa-unsplash"></i>
-            </Icon>
-            <UnderlineLink>{username}</UnderlineLink>
-          </UnsplashLink>
-        </UserAboutWrap>
-      </User>
-      <Link to="/">
-        <HomeLink>
+      <UserAboutWrap>
+        <Title>{name}</Title>
+
+        <span>
+          <IconLink href={unsplashUrl}>
+            <i className="fa-brands fa-unsplash"></i>
+          </IconLink>
+          <UnderlineLink href={unsplashUrl}>
+            <Subtitle>{username}</Subtitle>
+          </UnderlineLink>
+        </span>
+      </UserAboutWrap>
+
+      <HomeLink>
+        <Link to="/">
           <i className="fa-solid fa-house-chimney"></i>
-        </HomeLink>
-      </Link>
+        </Link>
+      </HomeLink>
     </TopContentWrap>
   );
 };
 
 const UserAboutWrap = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+
   @media screen and (max-width: 480px) {
     margin-top: 15px;
     text-align: center;
   }
 `;
 
-const UnderlineLink = styled.span`
+const UnderlineLink = styled.a`
+  text-decoration: none;
   display: inline-block;
   position: relative;
   &:before {
@@ -49,35 +71,27 @@ const UnderlineLink = styled.span`
     background-color: #1875ff;
     z-index: -5;
     transition: 0.2s;
+
     opacity: 0;
   }
-`;
-
-const UnsplashLink = styled.a`
-  color: #000;
-  text-decoration: none;
-  font-size: 1.2rem;
   &:hover {
-    ${UnderlineLink}:before {
+    &:before {
       opacity: 0.4;
     }
   }
 `;
 
-const Icon = styled.span`
+const IconLink = styled.a`
   margin-right: 10px;
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  @media screen and (max-width: 991px) {
-    font-size: 1.5rem;
+  &:hover {
+    & ~ ${UnderlineLink}:before {
+      opacity: 0.4;
+    }
   }
 `;
 
 const TopContentWrap = styled.div`
   display: flex;
-  justify-content: space-between;
 
   @media screen and (max-width: 480px) {
     flex-direction: column;
