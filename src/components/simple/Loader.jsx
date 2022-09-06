@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { color_secondary } from "../../core/constants";
 
 // size = small | normal | big
-const Loader = ({ size = "normal", color = "#000" }) => {
+const Loader = ({ size = "normal", color = color_secondary }) => {
   return (
     <LoaderWrapper size={size}>
       <LoaderStyled size={size} color={color}>

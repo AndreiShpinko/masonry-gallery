@@ -8,6 +8,7 @@ import Fade from "react-reveal/Fade";
 import ImageWithLoad from "../ordinary/ImageWithLoad";
 import RoundedLink from "../ui/RoundedLink";
 import Subtitle from "../ui/Subtitle";
+import { color_primary, color_secondary } from "../../core/constants";
 
 const Card = ({
   imageUrl,
@@ -43,10 +44,7 @@ const Card = ({
       <CardWrapper>
         <Link to={`/photo/${id}`} aria-label="to-unsplash-image">
           <ImageWrapper>
-            <ImageWithLoad
-              source={imageUrl}
-              color={color}
-            />
+            <ImageWithLoad source={imageUrl} color={color} />
           </ImageWrapper>
         </Link>
         <CardContent>
@@ -75,7 +73,9 @@ const Card = ({
 
 const changeColor = (color) => {
   const exampleColor = parseInt("d1d1d1", 16);
-  return parseInt(color.substr(1), 16) > exampleColor ? "#000" : "#fff";
+  return parseInt(color.substr(1), 16) > exampleColor
+    ? color_secondary
+    : color_primary;
 };
 
 const SubtitleStyles = `

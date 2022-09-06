@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { Link } from "react-router-dom";
 import Subtitle from "../ui/Subtitle";
 import Title from "../ui/Title";
+import { color_secondary, color_tertiary } from "../../core/constants";
 
 const TopContent = () => {
-
   const {
     user: {
       links: { html: unsplashUrl },
@@ -28,7 +28,9 @@ const TopContent = () => {
 
         <span>
           <IconLink href={unsplashUrl}>
-            <i className="fa-brands fa-unsplash"></i>
+            <Subtitle>
+              <i className="fa-brands fa-unsplash"></i>
+            </Subtitle>
           </IconLink>
           <UnderlineLink href={unsplashUrl}>
             <Subtitle>{username}</Subtitle>
@@ -54,6 +56,7 @@ const UserAboutWrap = styled.div`
   @media screen and (max-width: 480px) {
     margin-top: 15px;
     text-align: center;
+    order: 2;
   }
 `;
 
@@ -68,7 +71,7 @@ const UnderlineLink = styled.a`
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #1875ff;
+    background-color: ${color_tertiary};
     z-index: -5;
     transition: 0.2s;
 
@@ -101,21 +104,11 @@ const TopContentWrap = styled.div`
 
 const HomeLink = styled.div`
   font-size: 2rem;
-  color: #000;
+  color: ${color_secondary};
   margin: 0 0 10px 10px;
   @media screen and (max-width: 480px) {
+    order: 0;
     margin: 0;
-  }
-`;
-
-const User = styled.div`
-  display: flex;
-
-  @media screen and (max-width: 480px) {
-    flex-direction: column;
-    align-items: center;
-    order: 2;
-    margin-top: 20px;
   }
 `;
 
@@ -136,7 +129,8 @@ const UserImageWrap = styled.a`
     height: 100px;
   }
   @media screen and (max-width: 480px) {
-    margin: 0;
+    margin: 15px 0 0 0;
+    order: 1;
   }
 `;
 

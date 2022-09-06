@@ -57,7 +57,6 @@ const Gallery = () => {
                 instagramUrl={photo.user.social.instagram_username}
                 twitterUrl={photo.user.social.twitter_username}
                 id={photo.id}
-                // galleryLoaded={}
                 key={photo.id}
               />
             );

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color_tertiary } from "../../core/constants";
+import { color_primary, color_tertiary } from "../../core/constants";
 
 const Button = ({ children, click, styles }) => {
   return (
@@ -17,7 +17,7 @@ const ButtonStyled = styled.button`
   border-radius: 15px;
   transition: all 0.3s;
   font-size: 1.2rem;
-  color: #fff;
+  color: ${color_primary};
   box-shadow: 0px 3px 10px -3px ${color_tertiary};
   position: relative;
   border: none;

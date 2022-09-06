@@ -112,7 +112,6 @@ const Link = styled.a`
   border-radius: 10px;
   background-color: #eee;
   aspect-ratio: 1 / 1;
-  color: #000;
   font-size: 2rem;
   text-decoration: none;
 `;
