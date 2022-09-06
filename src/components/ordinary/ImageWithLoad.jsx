@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Loader from "../simple/Loader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { color_primary, color_secondary } from "../../core/constants";
 
 const ImageWithLoad = ({
   source,
-  loader,
+  loader = false,
   color = "#eee",
   loaderSize,
-  imgStyles = {},
 }) => {
   const [loadingImg, setLoadingImg] = useState(true);
 
@@ -16,7 +16,9 @@ const ImageWithLoad = ({
   const getColor = (color) => {
     color = color.length === 4 ? `${color}${color.slice(1)}` : color;
     const exampleColor = parseInt("d1d1d1", 16);
-    return parseInt(color.substr(1), 16) > exampleColor ? "#000" : "#fff";
+    return parseInt(color.substr(1), 16) > exampleColor
+      ? color_secondary
+      : color_primary;
   };
 
   return (

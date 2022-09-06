@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Subtitle from "../ui/Subtitle";
 import Title from "../ui/Title";
+import ImageWithLoad from "../ordinary/ImageWithLoad";
 import { color_secondary, color_tertiary } from "../../core/constants";
 
 const TopContent = () => {
@@ -20,7 +21,8 @@ const TopContent = () => {
   return (
     <TopContentWrap>
       <UserImageWrap href={unsplashUrl}>
-        <UserImage src={userAvatar} alt="" />
+        {/* <UserImage src={userAvatar} alt="" /> */}
+        <ImageWithLoad source={userAvatar} />
       </UserImageWrap>
 
       <UserAboutWrap>
@@ -55,7 +57,7 @@ const UserAboutWrap = styled.div`
 
   @media screen and (max-width: 480px) {
     margin-top: 15px;
-    text-align: center;
+    align-items: center;
     order: 2;
   }
 `;
