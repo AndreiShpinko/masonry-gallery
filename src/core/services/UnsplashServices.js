@@ -12,7 +12,6 @@ const UnsplashServices = {
   },
 
   getGalleryByQuery(query) {
-    console.log("getPhotosByQuery");
     return axios
       .get(
         `${this.API_URL}/search/photos/?client_id=${this.KEY}&per_page=50&query=${query}`
@@ -24,7 +23,6 @@ const UnsplashServices = {
     return axios
       .get(`${this.API_URL}/photos/${id}?client_id=${this.KEY}`)
       .then((res) => {
-        console.log(res.data);
         return res.data;
       });
   },

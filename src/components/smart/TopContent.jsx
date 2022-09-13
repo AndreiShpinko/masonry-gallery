@@ -21,7 +21,6 @@ const TopContent = () => {
   return (
     <TopContentWrap>
       <UserImageWrap href={unsplashUrl}>
-        {/* <UserImage src={userAvatar} alt="" /> */}
         <ImageWithLoad source={userAvatar} />
       </UserImageWrap>
 

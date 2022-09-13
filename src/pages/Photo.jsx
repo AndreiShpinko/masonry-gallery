@@ -101,11 +101,9 @@ const Photo = () => {
         </LeftPart>
         <RightPart>
           <Fade bottom duration={1000}>
-            <div>
-              <div>
-                {window.innerWidth > 768 && <TopContent />}
-                <UserLinks />
-              </div>
+            <div style={{ width: "100%" }}>
+              {window.innerWidth > 768 && <TopContent />}
+              <UserLinks />
               <UserImages />
             </div>
           </Fade>
@@ -184,6 +182,7 @@ const LeftPart = styled.div`
 const RightPart = styled.div`
   flex: 0 0 50%;
   overflow: hidden;
+  width: 100%;
 
   display: flex;
   flex-direction: column;

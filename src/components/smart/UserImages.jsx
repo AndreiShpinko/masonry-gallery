@@ -40,6 +40,7 @@ const UserImages = () => {
 };
 
 const Wrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -48,6 +49,8 @@ const Wrapper = styled.div`
 `;
 
 const SmallPhoto = styled.a`
+  width: 100%;
+  height: 100%;
   display: grid;
   aspect-ratio: 1;
   border-radius: 10px;
@@ -55,6 +58,8 @@ const SmallPhoto = styled.a`
 `;
 
 const BigPhoto = styled.a`
+  width: 100%;
+  height: 100%;
   display: grid;
   aspect-ratio: 1;
   border-radius: 10px;
